@@ -1,81 +1,269 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".actregistro">
 
+    <!-- Avatar / Imagen de perfil (FIJO, no scrollea) -->
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="131dp"
-        android:layout_height="117dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/usuario" />
 
+    <!-- Título (FIJO, no scrollea) -->
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Registro de Usuario"
-        android:textSize="20sp"
+        android:textColor="#1A1A1A"
+        android:textSize="22sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
+    <!-- ScrollView solo para los campos y botones -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
 
+            <!-- CÉDULA (máx 10 caracteres numérico) -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TextInputUsuario"
-                android:layout_width="0dp"
+                android:id="@+id/tilCedula"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:startIconDrawable="@drawable/usuario">
+                android:layout_marginBottom="16dp"
+                android:hint="Cédula"
+                app:boxStrokeColor="#6750A4"
+                app:hintTextColor="#6750A4"
+                app:startIconDrawable="@drawable/ic_badge"
+                app:startIconTint="#6750A4"
+                app:counterEnabled="true"
+                app:counterMaxLength="10">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/TextInputEditUsuario"
+                    android:id="@+id/etCedula"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nombre" />
+                    android:inputType="number"
+                    android:maxLength="10" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- NOMBRES (máx 500 chars, mayúsculas) -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TextInputApellido"
-                android:layout_width="0dp"
+                android:id="@+id/tilNombres"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Apellido"
-                app:layout_constraintTop_toBottomOf="@id/TextInputUsuario"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp">
+                android:layout_marginBottom="16dp"
+                android:hint="Nombres"
+                app:boxStrokeColor="#6750A4"
+                app:hintTextColor="#6750A4"
+                app:startIconDrawable="@drawable/ic_person"
+                app:startIconTint="#6750A4"
+                app:counterEnabled="true"
+                app:counterMaxLength="500">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/TextInputEditApellido"
+                    android:id="@+id/etNombres"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Apellido" />
+                    android:inputType="textPersonName|textCapCharacters"
+                    android:maxLength="500" />
             </com.google.android.material.textfield.TextInputLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <!-- FECHA DE NACIMIENTO -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilFechaNacimiento"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Fecha de nacimiento"
+                app:boxStrokeColor="#6750A4"
+                app:hintTextColor="#6750A4"
+                app:startIconDrawable="@drawable/ic_calendar"
+                app:startIconTint="#6750A4"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_calendar"
+                app:endIconTint="#6750A4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etFechaNacimiento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:cursorVisible="false"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- CIUDAD (máx 200 chars, mayúsculas) -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilCiudad"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Ciudad"
+                app:boxStrokeColor="#6750A4"
+                app:hintTextColor="#6750A4"
+                app:startIconDrawable="@drawable/ic_location"
+                app:startIconTint="#6750A4"
+                app:counterEnabled="true"
+                app:counterMaxLength="200">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCiudad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
+                    android:maxLength="200" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- CORREO ELECTRÓNICO -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilCorreo"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:hint="Correo electrónico"
+                app:boxStrokeColor="#6750A4"
+                app:hintTextColor="#6750A4"
+                app:startIconDrawable="@drawable/ic_email"
+                app:startIconTint="#6750A4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCorreo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- TELÉFONO CELULAR -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilTelefono"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:hint="Teléfono celular"
+                app:boxStrokeColor="#6750A4"
+                app:hintTextColor="#6750A4"
+                app:startIconDrawable="@drawable/ic_phone"
+                app:startIconTint="#6750A4">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTelefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- GÉNERO -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Género"
+                android:textColor="#1A1A1A"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupGenero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="32dp">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rbMasculino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="Masculino"
+                    android:checked="true"
+                    app:buttonTint="#6750A4" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rbFemenino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="Femenino"
+                    app:buttonTint="#6750A4" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rbOtro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Otro"
+                    app:buttonTint="#6750A4" />
+            </RadioGroup>
+
+            <!-- BOTONES -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="16dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLimpiar"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="Limpiar"
+                    android:textColor="#6750A4"
+                    app:strokeColor="#6750A4"
+                    app:cornerRadius="50dp"
+                    app:icon="@drawable/ic_clear"
+                    app:iconTint="#6750A4" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEnviar"
+                    style="@style/Widget.MaterialComponents.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp"
+                    android:text="Guardar perfil"
+                    android:textColor="#FFFFFF"
+                    app:backgroundTint="#6750A4"
+                    app:cornerRadius="50dp"
+                    app:icon="@drawable/ic_save"
+                    app:iconTint="#FFFFFF" />
+            </LinearLayout>
+
+        </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
